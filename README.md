@@ -30,8 +30,8 @@ Githubからアプリケーションのソースをダウンロードします�
 
 ```sh
 $ cd (適当なサブディレクトリ)
-$ git clone https://github.com/makaishi2/scikit-learn-sample.git
-$ cd scikit-learn-sample
+$ git clone https://github.com/makaishi2/watson-ml-scikit-learn.git
+$ cd swatson-ml-scikit-learn
 ```
 
 ## CFコマンドでログイン
