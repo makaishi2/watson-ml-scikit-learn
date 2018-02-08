@@ -1,0 +1,8 @@
+requests
+flask
+Image
+sklearn
+numpy
+scipy
+cfenv
+python-dotenv

@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block body %}
+<h3>Watson Machine Learning Sample</h3>
+画像分類機能
+<hr>
+画像ID(0-99)
+<input text id="image_id" value='10'>
+<br>
+画像 <img id="image_pane" width="50" height="50">
+<br>
+正解 <label id="label1"></label>
+<br>
+予測 <label id="label2"></label>
+<br>
+<input type="submit" id="select" value="テスト対象選択">
+<input type="submit" id="predict" value="予測">
+
+<script>
+$(function(){
+    $('#select').click(select_image) 
+});
+
+$(function(){
+    $('#predict').click(predict) 
+});
+
+function call_flask( type, url, data, success, error ) {
+// API呼出し
+    $.ajax({
+        type: type, 
+        url:  url, 
+        data: data,
+        contentType: "application/json; charset=utf-8",
+        success: success,
+        error: error
+        });
+}
+
+function select_callback(msg) {
+    src = "{{ url_for('static', filename='image.png') }}"
+    $('#image_pane').attr('src', src + '?' + new Date().getTime());
+    $('#label1').text(msg);
+    $('#label2').text('');
+    console.log(msg);
+}    
+
+function predict_callback(msg) {
+    $('#label2').text(msg);
+    console.log(msg);
+}    
+
+function select_image() {
+    image_id = Number($('#image_id').val());
+    console.log('select_image');
+    console.log('image_id: ' + image_id);
+    var data = {'image_id': image_id}
+    call_flask( 'GET', '/select_image', data, select_callback, 
+            function(XMLHttpRequest,textStatus,errorThrown){alert('error');} );
+}
+
+function predict() {
+    image_id = Number($('#image_id').val());
+    console.log('call_predict');
+    console.log('image_id: ' + image_id);
+    var data = {'image_id': image_id}
+    call_flask( 'GET', '/predict', data, predict_callback, 
+            function(XMLHttpRequest,textStatus,errorThrown){alert('error');} );
+}
+
+</script>
+
+{% endblock %}
