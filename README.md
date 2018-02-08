@@ -1,14 +1,15 @@
 # Watson Machine Learning サンプルアプリ
 
 ## アプリケーションの説明
-このアプリケーションはIBM DSXで機械学習を行い、Watson Machine Learning上に保存、Webサービス化した機械学習モデルをWebサービスによりアクセスし、予測を行うサンプルアプリです。
+このアプリケーションはIBM DSXで機械学習を行い、Watson Machine Learning上に保存、Webサービス化した機械学習モデルをWebサービスによりアクセスし、予測を行うサンプルアプリです。  
 機械学習モデルの詳細は[Watson Machine Learning - IBM DSX 上のscikit-learn 機械学習モデルをデプロイする -
 ](https://qiita.com/makaishi2/items/38371d272d752b6e7647)を参照して下さい。
 
 ![](readme_images/wml-sample-1.png)  
 
 ## 前提
-Watson DSX, Watson MLの導入と、Waton ML上のモデル保存、Webサービス化まで済んでいることを前提とします。  
+Watson DSX, Watson MLの導入と、Waton ML上のモデル保存、Webサービス化まで済んでいることを前提とします。
+この手順については、上記リンクに記載されていますが、[Jupyter Notebook](https://github.com/makaishi2/watson-ml-scikit-learn/blob/master/notebook/wml-scikit-learn.ipynb)をダウンロードし、IBM DSX 上にロードして実行すると、短時間でサーバー側準備を行うことも可能です。
 
 ## 事前準備
 Watson MLのインスタンス名を``machine-learning-1``に変更して下さい。インスタンス名の変更は、サービスの管理画面から行うことが可能です。
