@@ -7,7 +7,6 @@ from sklearn import datasets
 import numpy
 from PIL import Image
 import urllib3
-import requests
 import json
 from cfenv import AppEnv
 from os.path import join, dirname
