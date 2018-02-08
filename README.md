@@ -8,7 +8,7 @@
 ![](readme_images/wml-sample-1.png)  
 
 ## 前提
-Watson DSX, Watson MLの導入と、Waton ML上のモデル保存、Webサービス化まで済んでいることを前提とします。
+Watson DSX, Watson MLの導入と、Waton ML上のモデル保存、Webサービス化まで済んでいることを前提とします。  
 この手順については、上記リンクに記載されていますが、[Jupyter Notebook](https://github.com/makaishi2/watson-ml-scikit-learn/blob/master/notebook/wml-scikit-learn.ipynb)をダウンロードし、IBM DSX 上にロードして実行すると、短時間でサーバー側準備を行うことも可能です。
 
 ## 事前準備
