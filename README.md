@@ -63,6 +63,7 @@ WebサービスのエンドポイントURLに関しては、以下のコマン�
 
 ```
 $ cf set-env <service_name> SCORING_URL <scoring_url>
+$ cf restage  <service_name>
 ```
 
 ## アプリケーションのURLと起動
