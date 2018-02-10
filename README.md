@@ -88,7 +88,7 @@ https://<service_name>.mybluemix.net/
 [Node.jsダウンロード][node_js]からダウンロードして下さい。
 * 認証情報の確認  
 BluemixダッシュボードからWMLサービスの管理画面を開き、接続用の認証情報を調べてテキストエディタなどにコピーします。
-* .envファイルの設定
+* .envファイルの設定  
 次のコマンドで.env.exampleファイルの雛形から.envをコピーし、エディタで調べたusername, passwordを設定します。
 
 ```sh
