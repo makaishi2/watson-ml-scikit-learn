@@ -113,3 +113,4 @@ $ npm start
 [git]: https://git-scm.com/downloads
 [sign_up]: https://bluemix.net/registration
 [node_js]: https://nodejs.org/ja/download/
+ 
