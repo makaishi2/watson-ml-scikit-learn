@@ -20,9 +20,7 @@ if pm20 is None:
     load_dotenv(dotenv_path)
     wml_credentials = {
         "url": os.environ.get("WML_URL"),
-        "access_key": os.environ.get("WML_ACCESS_KEY"),
-        "username": os.environ.get("WML_USERNAME"),
-        "password":  os.environ.get("WML_PASSWORD"),
+        "apikey": os.environ.get("WML_APIKEY"),
         "instance_id": os.environ.get("WML_INSTANCE_ID")
     }
 else:
@@ -61,22 +59,30 @@ def select_image():
 def predict():
     print('/predict')
     image_id = int(request.args.get('image_id', ''))
-    data = score_data[image_id]
+    image_data = score_data[image_id]
 
-    # Basic認証用ヘッダの生成
-    auth = '{username}:{password}'.format(username=wml_credentials['username'], password=wml_credentials['password'])
-    header_basic_auth = urllib3.util.make_headers(basic_auth=auth)
-    url = '{}/v3/identity/token'.format(wml_credentials['url'])
-
-    # Tokenの取得
-    mltoken =  json.loads( requests.get(url, headers=header_basic_auth).text )['token']
-    print(mltoken)
-    header_token = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + mltoken}
+    # トークン取得
+    apikey = wml_credentials["apikey"]
+    # Get an IAM token from IBM Cloud
+    url     = "https://iam.bluemix.net/oidc/token"
+    headers = { "Content-Type" : "application/x-www-form-urlencoded" }
+    data    = "apikey=" + apikey + "&grant_type=urn:ibm:params:oauth:grant-type:apikey"
+    IBM_cloud_IAM_uid = "bx"
+    IBM_cloud_IAM_pwd = "bx"
+    response  = requests.post( url, headers=headers, data=data, 
+        auth=( IBM_cloud_IAM_uid, IBM_cloud_IAM_pwd ) )
+    iam_token = response.json()["access_token"]
+    print('iam_token = ', iam_token)
+    
+    # API呼出し用ヘッダ
+    ml_instance_id = wml_credentials["instance_id"]
+    header = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + iam_token, 
+      'ML-Instance-ID': ml_instance_id}
 
     # Webサービスの呼出し
-    payload_scoring = {"values": [list(data)]}
+    payload_scoring = {"values": [list(image_data)]}
     print(payload_scoring)
-    scoring_response = requests.post(scoring_url, json=payload_scoring, headers=header_token)
+    scoring_response = requests.post(scoring_url, json=payload_scoring, headers=header)
     scoring = json.loads( scoring_response.text )
 
     # 結果の取得
